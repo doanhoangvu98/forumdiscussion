@@ -3,8 +3,11 @@ class RepliesController < ApplicationController
     before_action :set_reply, only: [:edit, :update, :show, :destroy]
     before_action :set_discussion, only: [:create, :edit, :show, :update, :destroy]
 
+    def show
+    end
+    
     def create
-        @reply = @discussion.replies.create(params[:reply]).permit(:reply, :discussion_id)
+        @reply = @discussion.replies.create(params[:reply].permit(:reply, :discussion_id))
         @reply.user_id = current_user.id
 
         respond_to do |format|
@@ -12,8 +15,8 @@ class RepliesController < ApplicationController
                 format.html { redirect_to discussion_path(@discussion) }
                 format.js # render create.js.erb
             else
-            format.html { redirect_to discussion_path(@discussion), notice: "Reply failed. Please try again!"}
-            format.js
+                format.html { redirect_to discussion_path(@discussion), notice: "Reply failed. Please try again!"}
+                format.js
             end
         end
     end

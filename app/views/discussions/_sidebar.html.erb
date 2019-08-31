@@ -1,0 +1,15 @@
+<div class="column is-3 is-offset-1">
+    <h3 class="title is-5 has-text-grey-light">Topics</h3>
+
+    <ul>
+        <% @topics.each do |t| %>
+            <li><%= link_to t.topic, t %></li>
+        <% end %>
+    </ul>
+
+    <br>
+
+    <!-- Admin role -->
+
+    <%= link_to "New Topic", new_topic_path, class: "button is-info" %>
+</div>

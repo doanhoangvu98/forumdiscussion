@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :discussions
+  resources :topics
+  resources :discussions do
+    resources :replies
+  end
   
   root "discussions#index"
 

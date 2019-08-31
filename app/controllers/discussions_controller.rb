@@ -1,20 +1,23 @@
 class DiscussionsController < ApplicationController
   before_action :set_discussion, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :find_topics, only: [:index, :show, :new, :edit]
+ 
   # GET /discussions
   # GET /discussions.json
   def index
-    @discussions = Discussion.all
+    @discussions = Discussion.all.order("created_at desc")
   end
 
   # GET /discussions/1
   # GET /discussions/1.json
   def show
+    @discussions = Discussion.all.order("created_at desc")
   end
 
   # GET /discussions/new
   def new
-    @discussion = Discussion.new
+    @discussion = current_user.discussions.build
   end
 
   # GET /discussions/1/edit
@@ -24,7 +27,7 @@ class DiscussionsController < ApplicationController
   # POST /discussions
   # POST /discussions.json
   def create
-    @discussion = Discussion.new(discussion_params)
+    @discussion = current_user.discussions.build(discussion_params)
 
     respond_to do |format|
       if @discussion.save
@@ -65,6 +68,10 @@ class DiscussionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_discussion
       @discussion = Discussion.find(params[:id])
+    end
+
+    def find_topics
+      @topics = Topic.all.order("created_at desc")
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

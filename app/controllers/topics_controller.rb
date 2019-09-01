@@ -11,8 +11,8 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show
-    @discussions = Discussion.where("topic_id = ?", @topic_id)
-    @topics = Topic.all
+    @discussions = Discussion.where("topic_id = ?", @topic)
+    # @discussions = Discussion.where(:topic_id => @topic)
   end
 
   # GET /topics/new

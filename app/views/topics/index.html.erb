@@ -1,6 +1,7 @@
 <h1 class="title is-2">Topics</h1>
 
 <%# if has_role?(:admin) %>
+<% if has_role?(:admin )%>
 <div class="level">
   <div class="level-left"></div>
   <div class="level-right">
@@ -21,8 +22,8 @@
       <td class="menu-list"><%= link_to topic.topic, topic %></td>
       <td>
         <div class="buttons is-right">
-          <%= link_to 'View Topic', topic, class:'button is-info' %>
-          <%= link_to 'Edit Topic', edit_topic_path(topic), class:'button is-success' %>
+          <%= link_to 'View Topic', topic, class:'button is-light' %>
+          <%= link_to 'Edit Topic', edit_topic_path(topic), class:'button is-light' %>
           <%= link_to 'Delete', topic, class:'button is-danger', method: :delete, data: { confirm: "Are you sure? " } %>
         </div>
       </td>
@@ -32,6 +33,6 @@
 
 </table>
 
-<%# else %>
+<% else %>
  <p class="has-text-center">Sorry! You don't have access this page.</p>
-<%# end %>
+<% end %>

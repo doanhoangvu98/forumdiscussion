@@ -10,5 +10,7 @@
     <br>
 
     <!-- Admin role -->
-    <%= link_to "New Topic", new_topic_path, class: "button is-info" %>
+    <% if has_role?(:admin) %>
+        <%= link_to "New Topic", new_topic_path, class: "button is-info" %>
+    <% end %>
 </div>
